@@ -31,6 +31,8 @@ interface CarEconomics {
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
+  appTitle = 'Car Economics Calculator';
+  brandName = 'Engage Technologies';
   carForm: FormGroup;
   cars: CarData[] = [];
   economics: CarEconomics[] = [];

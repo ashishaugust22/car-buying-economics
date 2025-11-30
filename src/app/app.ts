@@ -21,6 +21,16 @@ interface CarEconomics {
   fuelCostDaily: number;
   maintenanceCostDaily: number;
   depreciationDaily: number;
+  roiGuidance?: ROIGuidance[];
+}
+
+interface ROIGuidance {
+  year: number;
+  totalCost: number;
+  costPerYear: number;
+  residualValue: number;
+  netCost: number;
+  recommendation: string;
 }
 
 @Component({
@@ -160,6 +170,9 @@ export class App implements OnInit {
     const yearlyCost = dailyCost * 365;
     const costPerKm = dailyCost / dailyKm;
 
+    // Calculate ROI Guidance for 1-10 years
+    const roiGuidance = this.calculateROIGuidance(car, dailyKm, fuelCostDaily, maintenanceCostDaily);
+
     return {
       name: car.name,
       dailyCost: Math.round(dailyCost * 100) / 100,
@@ -168,8 +181,61 @@ export class App implements OnInit {
       costPerKm: Math.round(costPerKm * 100) / 100,
       fuelCostDaily: Math.round(fuelCostDaily * 100) / 100,
       maintenanceCostDaily: Math.round(maintenanceCostDaily * 100) / 100,
-      depreciationDaily: Math.round(depreciationDaily * 100) / 100
+      depreciationDaily: Math.round(depreciationDaily * 100) / 100,
+      roiGuidance: roiGuidance
     };
+  }
+
+  calculateROIGuidance(car: CarData, dailyKm: number, fuelCostDaily: number, maintenanceCostDaily: number): ROIGuidance[] {
+    const roiData: ROIGuidance[] = [];
+    
+    for (let year = 1; year <= 10; year++) {
+      // Total kilometers in the year
+      const totalKmInYear = dailyKm * 365 * year;
+      
+      // Fuel and maintenance costs
+      const fuelAndMaintenanceCost = (fuelCostDaily + maintenanceCostDaily) * 365 * year;
+      
+      // Depreciation: Use linear depreciation model
+      // Assuming car depreciates 15% in year 1, then 10% of remaining value annually
+      let residualValue = car.purchasePrice;
+      if (year === 1) {
+        residualValue = car.purchasePrice * 0.85; // 15% depreciation in year 1
+      } else {
+        residualValue = car.purchasePrice * 0.85;
+        for (let i = 2; i <= year; i++) {
+          residualValue = residualValue * 0.90; // 10% depreciation per year after year 1
+        }
+      }
+      
+      // Total cost = Purchase price + Operating costs - Residual value
+      const totalCost = car.purchasePrice + fuelAndMaintenanceCost - residualValue;
+      const costPerYear = totalCost / year;
+      const netCost = totalCost;
+      
+      // Recommendation based on cost per year
+      let recommendation = '';
+      if (year <= 3) {
+        recommendation = 'Early ownership - Focus on mileage benefits';
+      } else if (year <= 5) {
+        recommendation = 'Optimal ownership period for most vehicles';
+      } else if (year <= 7) {
+        recommendation = 'Extended ownership - Depreciation benefits plateau';
+      } else {
+        recommendation = 'Long-term ownership - Maximize usage before resale';
+      }
+      
+      roiData.push({
+        year: year,
+        totalCost: Math.round(totalCost * 100) / 100,
+        costPerYear: Math.round(costPerYear * 100) / 100,
+        residualValue: Math.round(residualValue * 100) / 100,
+        netCost: Math.round(netCost * 100) / 100,
+        recommendation: recommendation
+      });
+    }
+    
+    return roiData;
   }
 
   findMostEconomical() {

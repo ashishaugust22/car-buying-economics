@@ -1,22 +1,23 @@
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-6 md:p-8">
   <div class="max-w-7xl mx-auto">
-    <!-- Header with Branding --> <div class="mb-12 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg p-8 shadow-lg">
-      <div class="flex items-center justify-between mb-4">
+    <!-- Header with Branding -->
+    <div class="mb-8 sm:mb-12 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg p-6 sm:p-8 shadow-lg">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
         <div>
-          <p class="text-sm font-semibold text-indigo-200 mb-1">By Engage Technologies</p>
-          <h1 class="text-4xl font-bold mb-2">🚗 {{ appTitle }}</h1>
+          <p class="text-xs sm:text-sm font-semibold text-indigo-200 mb-1">By Engage Technologies</p>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">🚗 {{ appTitle }}</h1>
         </div>
         <div class="text-right">
-          <p class="text-indigo-100 text-2xl font-bold">ET</p>
+          <p class="text-indigo-100 text-xl sm:text-2xl font-bold">ET</p>
           <p class="text-xs text-indigo-200">Engage Tech</p>
         </div>
       </div>
-      <p class="text-lg text-indigo-50">Compare the real cost of owning different vehicles and make informed decisions</p>
+      <p class="text-sm sm:text-base md:text-lg text-indigo-50">Compare the real cost of owning different vehicles and make informed decisions</p>
     </div>
 
     <!-- Add Car Form -->
-    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-6">Add a Car</h2>
+    <div class="bg-white rounded-lg shadow-lg p-6 sm:p-8 mb-8">
+      <h2 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-6">Add a Car</h2>
       <form [formGroup]="carForm" (ngSubmit)="addCar()" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Car Name -->
         <div>
@@ -101,17 +102,17 @@
         </div>
 
         <!-- Submit Button -->
-        <div class="flex gap-4 md:col-span-2 lg:col-span-3">
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 md:col-span-2 lg:col-span-3">
           <button
             type="submit"
-            class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200"
+            class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition duration-200 text-sm sm:text-base"
           >
             Add Car
           </button>
           <button
             type="button"
             (click)="resetForm()"
-            class="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-6 rounded-lg transition duration-200"
+            class="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition duration-200 text-sm sm:text-base"
           >
             Reset
           </button>
@@ -121,13 +122,13 @@
 
     <!-- Most Economical Car Alert -->
     @if (mostEconomical) {
-      <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-8 rounded">
-        <div class="flex items-center mb-2">
-          <span class="text-3xl mr-3">🏆</span>
-          <h3 class="text-2xl font-bold text-green-800">Most Economical: {{ mostEconomical.name }}</h3>
+      <div class="bg-green-50 border-l-4 border-green-500 p-4 sm:p-6 mb-8 rounded">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-2 sm:mb-0">
+          <span class="text-2xl sm:text-3xl">🏆</span>
+          <h3 class="text-lg sm:text-2xl font-bold text-green-800">Most Economical: {{ mostEconomical.name }}</h3>
         </div>
-        <p class="text-green-700 text-lg">
-          <strong>₹{{ mostEconomical.costPerKm }}/km</strong> · Daily: ₹{{ mostEconomical.dailyCost }} · Monthly: ₹{{ mostEconomical.monthlyCost }}
+        <p class="text-green-700 text-sm sm:text-base md:text-lg mt-3 sm:mt-2">
+          <strong>₹{{ mostEconomical.costPerKm }}/km</strong> <span class="hidden sm:inline">·</span> <span class="block sm:inline">Daily: ₹{{ mostEconomical.dailyCost }}</span> <span class="hidden sm:inline">·</span> <span class="block sm:inline">Monthly: ₹{{ mostEconomical.monthlyCost }}</span>
         </p>
       </div>
     }
@@ -137,11 +138,11 @@
       <div class="grid grid-cols-1 gap-8">
         @for (car of cars; let i = $index; track i) {
           @let economy = economics[i];
-          <div class="bg-white rounded-lg shadow-lg p-8 border-l-4 border-indigo-500">
+          <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6 md:p-8 border-l-4 border-indigo-500">
             <!-- Car Header -->
-            <div class="flex justify-between items-start mb-6 pb-4 border-b">
+            <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6 pb-4 border-b">
               <div>
-                <h3 class="text-2xl font-bold text-gray-800">{{ car.name }}</h3>
+                <h3 class="text-lg sm:text-2xl font-bold text-gray-800">{{ car.name }}</h3>
                 <p class="text-gray-600">
                   <span class="badge-fuel" [ngClass]="{
                     'bg-blue-100 text-blue-800': car.fuelType === 'petrol',
@@ -156,7 +157,7 @@
               </div>
               <button
                 (click)="removeCar(i)"
-                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200"
+                class="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-200 text-sm sm:text-base"
               >
                 Remove
               </button>
@@ -183,58 +184,224 @@
             </div>
 
             <!-- Cost Breakdown -->
-            <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-6 mb-6">
-              <h4 class="text-lg font-semibold text-gray-800 mb-4">Daily Cost Breakdown</h4>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div class="bg-white p-4 rounded border border-indigo-100">
-                  <p class="text-gray-600 text-sm font-medium">Fuel Cost</p>
-                  <p class="text-2xl font-bold text-indigo-600">₹{{ economy.fuelCostDaily }}</p>
+            <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 sm:p-6 mb-6">
+              <h4 class="text-base sm:text-lg font-semibold text-gray-800 mb-4">Daily Cost Breakdown</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6">
+                <div class="bg-white p-3 sm:p-4 rounded border border-indigo-100">
+                  <p class="text-gray-600 text-xs sm:text-sm font-medium">Fuel Cost</p>
+                  <p class="text-lg sm:text-2xl font-bold text-indigo-600 mt-1">₹{{ economy.fuelCostDaily }}</p>
                 </div>
-                <div class="bg-white p-4 rounded border border-indigo-100">
-                  <p class="text-gray-600 text-sm font-medium">Maintenance</p>
-                  <p class="text-2xl font-bold text-indigo-600">₹{{ economy.maintenanceCostDaily }}</p>
+                <div class="bg-white p-3 sm:p-4 rounded border border-indigo-100">
+                  <p class="text-gray-600 text-xs sm:text-sm font-medium">Maintenance</p>
+                  <p class="text-lg sm:text-2xl font-bold text-indigo-600 mt-1">₹{{ economy.maintenanceCostDaily }}</p>
                 </div>
-                <div class="bg-white p-4 rounded border border-indigo-100">
-                  <p class="text-gray-600 text-sm font-medium">Depreciation</p>
-                  <p class="text-2xl font-bold text-indigo-600">₹{{ economy.depreciationDaily }}</p>
+                <div class="bg-white p-3 sm:p-4 rounded border border-indigo-100">
+                  <p class="text-gray-600 text-xs sm:text-sm font-medium">Depreciation</p>
+                  <p class="text-lg sm:text-2xl font-bold text-indigo-600 mt-1">₹{{ economy.depreciationDaily }}</p>
                 </div>
               </div>
 
               <!-- Cost Summary -->
               <div class="bg-indigo-100 p-4 rounded-lg border-2 border-indigo-400">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                   <div>
-                    <p class="text-gray-600 text-sm font-medium">Daily Cost</p>
-                    <p class="text-2xl font-bold text-indigo-700">₹{{ economy.dailyCost }}</p>
+                    <p class="text-gray-600 text-xs sm:text-sm font-medium">Daily Cost</p>
+                    <p class="text-base sm:text-xl md:text-2xl font-bold text-indigo-700 mt-1">₹{{ economy.dailyCost }}</p>
                   </div>
                   <div>
-                    <p class="text-gray-600 text-sm font-medium">Monthly Cost</p>
-                    <p class="text-2xl font-bold text-indigo-700">₹{{ economy.monthlyCost | number }}</p>
+                    <p class="text-gray-600 text-xs sm:text-sm font-medium">Monthly Cost</p>
+                    <p class="text-base sm:text-xl md:text-2xl font-bold text-indigo-700 mt-1">₹{{ economy.monthlyCost | number }}</p>
+                  </div>
+                  <div class="hidden sm:block">
+                    <p class="text-gray-600 text-xs sm:text-sm font-medium">Yearly Cost</p>
+                    <p class="text-base sm:text-xl md:text-2xl font-bold text-indigo-700 mt-1">₹{{ economy.yearlyCost | number }}</p>
                   </div>
                   <div>
-                    <p class="text-gray-600 text-sm font-medium">Yearly Cost</p>
-                    <p class="text-2xl font-bold text-indigo-700">₹{{ economy.yearlyCost | number }}</p>
-                  </div>
-                  <div>
-                    <p class="text-gray-600 text-sm font-medium">Cost per KM</p>
-                    <p class="text-2xl font-bold text-indigo-700">₹{{ economy.costPerKm }}</p>
+                    <p class="text-gray-600 text-xs sm:text-sm font-medium">Cost/KM</p>
+                    <p class="text-base sm:text-xl md:text-2xl font-bold text-indigo-700 mt-1">₹{{ economy.costPerKm }}</p>
                   </div>
                 </div>
               </div>
             </div>
+
+            <!-- ROI Guidance for 1-10 Years -->
+            @if (economy.roiGuidance && economy.roiGuidance.length > 0) {
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 mt-6">
+                <h4 class="text-base sm:text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                  <span>📊</span>
+                  <span>ROI Guidance: Ownership Duration (1-10 Years)</span>
+                </h4>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-xs sm:text-sm">
+                    <thead>
+                      <tr class="bg-blue-100 border-b border-blue-300">
+                        <th class="px-2 sm:px-4 py-2 text-left font-semibold text-gray-800">Year</th>
+                        <th class="px-2 sm:px-4 py-2 text-right font-semibold text-gray-800">Total Cost (₹)</th>
+                        <th class="px-2 sm:px-4 py-2 text-right font-semibold text-gray-800">Cost/Year (₹)</th>
+                        <th class="hidden sm:table-cell px-2 sm:px-4 py-2 text-right font-semibold text-gray-800">Residual Value (₹)</th>
+                        <th class="hidden md:table-cell px-2 sm:px-4 py-2 text-left font-semibold text-gray-800">Recommendation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (roi of economy.roiGuidance; let isEven = $even; track roi.year) {
+                        <tr [ngClass]="{
+                          'bg-green-50': roi.year <= 3,
+                          'bg-white': roi.year > 3 && roi.year <= 5,
+                          'bg-yellow-50': roi.year > 5 && roi.year <= 7,
+                          'bg-orange-50': roi.year > 7
+                        }" class="border-b border-blue-200">
+                          <td class="px-2 sm:px-4 py-3 font-bold text-gray-800">{{ roi.year }}</td>
+                          <td class="px-2 sm:px-4 py-3 text-right font-semibold text-gray-800">{{ roi.totalCost | number }}</td>
+                          <td class="px-2 sm:px-4 py-3 text-right font-semibold text-indigo-700">{{ roi.costPerYear | number }}</td>
+                          <td class="hidden sm:table-cell px-2 sm:px-4 py-3 text-right text-gray-700">{{ roi.residualValue | number }}</td>
+                          <td class="hidden md:table-cell px-2 sm:px-4 py-3 text-sm text-gray-700">{{ roi.recommendation }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+                
+                <!-- ROI Legend -->
+                <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                  <div class="bg-green-100 p-3 rounded border border-green-300">
+                    <p class="text-xs font-semibold text-green-800">Years 1-3</p>
+                    <p class="text-xs text-green-700">Early Ownership</p>
+                  </div>
+                  <div class="bg-white p-3 rounded border border-blue-300">
+                    <p class="text-xs font-semibold text-blue-800">Years 4-5</p>
+                    <p class="text-xs text-blue-700">Optimal Period</p>
+                  </div>
+                  <div class="bg-yellow-100 p-3 rounded border border-yellow-300">
+                    <p class="text-xs font-semibold text-yellow-800">Years 6-7</p>
+                    <p class="text-xs text-yellow-700">Extended Use</p>
+                  </div>
+                  <div class="bg-orange-100 p-3 rounded border border-orange-300">
+                    <p class="text-xs font-semibold text-orange-800">Years 8-10</p>
+                    <p class="text-xs text-orange-700">Long-term Ownership</p>
+                  </div>
+                </div>
+
+                <!-- ROI Insights -->
+                <div class="mt-4 bg-white p-3 sm:p-4 rounded border border-blue-300">
+                  <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                    <strong>💡 Insight:</strong> The table shows total ownership cost and average cost per year for each duration.
+                    Residual value decreases over time due to depreciation. Shorter ownership periods typically have higher per-year costs due to initial depreciation impact.
+                    Consider your expected ownership period when purchasing to optimize long-term ROI.
+                  </p>
+                </div>
+              </div>
+            }
           </div>
         }
       </div>
     } @else {
-      <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded text-center">
-        <p class="text-gray-600 text-lg">No cars added yet. Start by filling the form above!</p>
+      <div class="bg-blue-50 border-l-4 border-blue-500 p-4 sm:p-6 rounded text-center">
+        <p class="text-gray-600 text-base sm:text-lg">No cars added yet. Start by filling the form above!</p>
       </div>
     }
 
+    <!-- Glossary/Terms Section -->
+    <div class="bg-purple-50 border-l-4 border-purple-500 p-4 sm:p-6 mt-8 rounded">
+      <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-4">📚 Glossary of Terms</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        
+        <!-- Daily Cost -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Daily Cost</h4>
+          <p class="text-xs sm:text-sm text-gray-700">The average amount you spend per day to own and operate the vehicle. Includes fuel, maintenance, and depreciation costs.</p>
+        </div>
+
+        <!-- Monthly Cost -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Monthly Cost</h4>
+          <p class="text-xs sm:text-sm text-gray-700">Daily cost multiplied by 30. Represents your average monthly expense for owning the vehicle.</p>
+        </div>
+
+        <!-- Yearly Cost -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Yearly Cost</h4>
+          <p class="text-xs sm:text-sm text-gray-700">Daily cost multiplied by 365. The annual total cost of ownership including all operational expenses.</p>
+        </div>
+
+        <!-- Cost Per Kilometer -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Cost/KM</h4>
+          <p class="text-xs sm:text-sm text-gray-700">Daily cost divided by daily kilometers. Represents the cost incurred for every kilometer driven.</p>
+        </div>
+
+        <!-- Fuel Cost (Daily) -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Fuel Cost (Daily)</h4>
+          <p class="text-xs sm:text-sm text-gray-700">Daily fuel expense calculated as: (Daily KM ÷ Fuel Efficiency) × Fuel Cost per unit.</p>
+        </div>
+
+        <!-- Maintenance Cost (Daily) -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Maintenance Cost (Daily)</h4>
+          <p class="text-xs sm:text-sm text-gray-700">Daily maintenance expense calculated as: Daily KM × Maintenance Cost per KM. Includes servicing, spare parts, and repairs.</p>
+        </div>
+
+        <!-- Depreciation (Daily) -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Depreciation (Daily)</h4>
+          <p class="text-xs sm:text-sm text-gray-700">The daily loss in vehicle value. Spread over 5 years with assumption of 20% residual value after ownership.</p>
+        </div>
+
+        <!-- Fuel Efficiency -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Fuel Efficiency</h4>
+          <p class="text-xs sm:text-sm text-gray-700">Distance traveled per unit of fuel (km/liter for petrol/diesel/CNG, km/kWh for electric). Higher efficiency = lower fuel costs.</p>
+        </div>
+
+        <!-- Purchase Price -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Purchase Price</h4>
+          <p class="text-xs sm:text-sm text-gray-700">The on-road cost of the vehicle (including taxes, registration, and insurance). Used to calculate depreciation.</p>
+        </div>
+
+        <!-- Total Cost (ROI) -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Total Cost (ROI Years)</h4>
+          <p class="text-xs sm:text-sm text-gray-700">Cumulative cost of ownership for a specific year: Purchase Price + Operating Costs - Residual Value.</p>
+        </div>
+
+        <!-- Cost Per Year -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Cost Per Year</h4>
+          <p class="text-xs sm:text-sm text-gray-700">Total cost divided by number of years owned. Helps identify the optimal ownership period for best value.</p>
+        </div>
+
+        <!-- Residual Value -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Residual Value</h4>
+          <p class="text-xs sm:text-sm text-gray-700">Expected resale value of the vehicle after a given period. Depreciates 15% in year 1, then 10% annually thereafter.</p>
+        </div>
+
+        <!-- Daily Kilometers -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Daily Kilometers</h4>
+          <p class="text-xs sm:text-sm text-gray-700">Average distance you drive per day. Used to calculate fuel consumption, maintenance, and depreciation costs.</p>
+        </div>
+
+        <!-- Fuel Type -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Fuel Type</h4>
+          <p class="text-xs sm:text-sm text-gray-700">The energy source for the vehicle: Petrol, Diesel, CNG, Hybrid, or Electric. Different types have different efficiency and maintenance costs.</p>
+        </div>
+
+        <!-- Most Economical -->
+        <div class="bg-white p-4 rounded border border-purple-200">
+          <h4 class="font-semibold text-gray-800 text-sm mb-2">Most Economical</h4>
+          <p class="text-xs sm:text-sm text-gray-700">The vehicle with the lowest daily cost among all cars added to the calculator. Helps you identify the best value option.</p>
+        </div>
+
+      </div>
+    </div>
+
     <!-- Assumptions/Notes -->
-    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mt-8 rounded">
-      <h3 class="text-lg font-semibold text-gray-800 mb-3">📌 Assumptions & Notes</h3>
-      <ul class="text-gray-700 space-y-2 text-sm">
+    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 sm:p-6 mt-8 rounded">
+      <h3 class="text-base sm:text-lg font-semibold text-gray-800 mb-3">📌 Assumptions & Notes</h3>
+      <ul class="text-gray-700 space-y-2 text-xs sm:text-sm">
         <li>• <strong>Depreciation:</strong> Calculated assuming 80% depreciation over 5 years based on daily kilometers</li>
         <li>• <strong>Default Efficiency:</strong> Petrol: 15 km/l, Diesel: 18 km/l, CNG: 22 km/l, Hybrid: 20 km/l, Electric: User-specified</li>
         <li>• <strong>Default Maintenance:</strong> Petrol: ₹0.5/km, Diesel: ₹0.6/km, CNG: ₹0.4/km, Electric: ₹0.2/km, Hybrid: ₹0.4/km</li>
@@ -244,13 +411,13 @@
     </div>
 
     <!-- Footer -->
-    <footer class="mt-12 pt-8 border-t border-gray-200">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="text-center md:text-left mb-4 md:mb-0">
-          <p class="text-gray-600 font-semibold">{{ brandName }}</p>
-          <p class="text-sm text-gray-500">Intelligent Solutions for Smart Decisions</p>
+    <footer class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200">
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0">
+        <div class="text-center sm:text-left">
+          <p class="text-gray-600 font-semibold text-sm sm:text-base">{{ brandName }}</p>
+          <p class="text-xs sm:text-sm text-gray-500">Intelligent Solutions for Smart Decisions</p>
         </div>
-        <div class="text-center text-sm text-gray-500">
+        <div class="text-center text-xs sm:text-sm text-gray-500">
           <p>&copy; 2025 {{ brandName }}. All rights reserved.</p>
           <p class="mt-1">Building tools that matter</p>
         </div>
